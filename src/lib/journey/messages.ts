@@ -29,6 +29,7 @@ export type MessageFieldKey<E extends EntityKey> = E extends keyof MessageFields
 
 export const REQUIRED_MESSAGES: { [E in EntityKey]?: Partial<Record<MessageFieldKey<E>, string>> } = {
   // <custom:messages>
+  gutschrift: { gutschriftsnummer: "Bitte die Gutschriftsnummer eingeben.", gutschriftsdatum: "Bitte das Gutschriftsdatum wählen.", aussteller_firma: "Bitte die Firma des Ausstellers eingeben.", aussteller_strasse: "Bitte die Straße des Ausstellers eingeben.", aussteller_hausnummer: "Bitte die Hausnummer des Ausstellers eingeben.", aussteller_plz: "Bitte die Postleitzahl des Ausstellers eingeben.", aussteller_ort: "Bitte den Ort des Ausstellers eingeben.", aussteller_ustid: "Bitte die USt-ID des Ausstellers eingeben.", empfaenger_firma: "Bitte die Firma des Empfängers eingeben.", empfaenger_strasse: "Bitte die Straße des Empfängers eingeben.", empfaenger_hausnummer: "Bitte die Hausnummer des Empfängers eingeben.", empfaenger_plz: "Bitte die Postleitzahl des Empfängers eingeben.", empfaenger_ort: "Bitte den Ort des Empfängers eingeben.", nettobetrag: "Bitte den Nettobetrag eingeben.", steuersatz: "Bitte den Steuersatz eingeben.", bruttobetrag: "Bitte den Bruttobetrag eingeben." },
   // </custom:messages>
 };
 
