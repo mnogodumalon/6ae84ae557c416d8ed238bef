@@ -1,0 +1,15 @@
+{
+  "entities": {
+    "Gutschrift": {
+      "placeholders_set": 17,
+      "defaults_keys": [
+        "gutschriftsdatum",
+        "steuersatz"
+      ],
+      "computed_keys": [
+        "bruttobetrag"
+      ],
+      "reason": "Bruttobetrag wird aus Nettobetrag und Steuersatz berechnet; Gutschriften können negative Beträge haben."
+    }
+  }
+}

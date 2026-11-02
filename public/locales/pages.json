@@ -1,0 +1,29 @@
+{
+  "pages": {
+    "en": {
+      "Alle Gutschriften haben eine ZUGFeRD-PDF.": "All credit notes have a ZUGFeRD PDF.",
+      "Alle Gutschriften sind verarbeitet — zuletzt {0} von {1}.": "All credit notes are processed — most recently {0} of {1}.",
+      "Alles verarbeitet": "All processed",
+      "Aussteller unbekannt": "Issuer unknown",
+      "Erste Gutschrift hochladen": "Upload first credit note",
+      "Gutschrift hochladen": "Upload credit note",
+      "Gutschriften ohne ZUGFeRD-PDF": "Credit notes without ZUGFeRD PDF",
+      "Keine passende Gutschrift gefunden.": "No matching credit note found.",
+      "Lade deine erste Gutschrift als PDF hoch.": "Upload your first credit note as a PDF.",
+      "Noch keine Gutschrift erfasst — lade ein PDF hoch und erhalte daraus eine ZUGFeRD-PDF.": "No credit note recorded yet — upload a PDF and get a ZUGFeRD PDF from it.",
+      "Noch nicht verarbeitet": "Not yet processed",
+      "Nummer, Firma suchen …": "Search number, company …",
+      "Offen": "Open",
+      "Ohne Nummer": "No number",
+      "Ohne ZUGFeRD": "Without ZUGFeRD",
+      "Ohne ZUGFeRD-PDF": "Without ZUGFeRD PDF",
+      "Summe Bruttobeträge": "Total gross amounts",
+      "ZUGFeRD ergänzen": "Add ZUGFeRD",
+      "ZUGFeRD-PDF": "ZUGFeRD PDF",
+      "Zuletzt hochgeladene Gutschriften": "Recently uploaded credit notes",
+      "aus {0} Gutschriften": "from {0} credit notes",
+      "{0} wartet noch auf die ZUGFeRD-PDF.": "{0} is still waiting for the ZUGFeRD PDF."
+    }
+  },
+  "v": 1
+}

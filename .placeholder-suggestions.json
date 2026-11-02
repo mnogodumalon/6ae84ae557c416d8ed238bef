@@ -1,0 +1,21 @@
+{
+  "GutschriftDialog.tsx": {
+    "gutschriftsnummer": "z. B. GS-2026-001",
+    "gutschriftsdatum": "Wann wurde sie ausgestellt?",
+    "aussteller_firma": "z. B. Muster GmbH",
+    "aussteller_strasse": "z. B. Hauptstraße",
+    "aussteller_hausnummer": "z. B. 12a",
+    "aussteller_plz": "z. B. 10115",
+    "aussteller_ort": "z. B. Berlin",
+    "aussteller_ustid": "z. B. DE123456789",
+    "empfaenger_firma": "z. B. Beispiel AG",
+    "empfaenger_strasse": "z. B. Bahnhofstraße",
+    "empfaenger_hausnummer": "z. B. 5",
+    "empfaenger_plz": "z. B. 80331",
+    "empfaenger_ort": "z. B. München",
+    "nettobetrag": "z. B. 1000,00",
+    "steuersatz": "z. B. 19",
+    "bruttobetrag": "z. B. 1190,00",
+    "bemerkung": "Hinweise zur Gutschrift"
+  }
+}

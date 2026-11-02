@@ -1,0 +1,147 @@
+{
+  "version": 1,
+  "language": "de",
+  "understanding": {
+    "summary": "Die Anwendung verwaltet Gutschriften. Sie laden eine Gutschrift als PDF hoch (keine Rechnungskorrektur), die Daten werden erfasst und Sie erhalten daraus eine ZUGFeRD-PDF.",
+    "roles": [
+      "Buchhaltung",
+      "Geschäftsführung"
+    ],
+    "main_tasks": [
+      "Gutschrift als PDF hochladen und Daten erfassen",
+      "ZUGFeRD-PDF aus der Gutschrift erzeugen lassen",
+      "Gutschriften suchen und ansehen"
+    ],
+    "platform_roles": [
+      {
+        "persona": "Buchhaltung",
+        "role": "datenverarbeitung",
+        "apps": [
+          "gutschrift"
+        ]
+      },
+      {
+        "persona": "Geschäftsführung",
+        "role": "standard",
+        "apps": [
+          "gutschrift"
+        ]
+      }
+    ]
+  },
+  "flows": [
+    {
+      "slug": "gutschrift-erfassen",
+      "label": {
+        "de": "Gutschrift erfassen",
+        "en": "Record credit note"
+      },
+      "description": "Die PDF-Gutschrift wird hochgeladen und die Kopfdaten für die ZUGFeRD-Erzeugung werden erfasst. Die ZUGFeRD-PDF entsteht danach automatisch.",
+      "priority": "must",
+      "writes": [
+        {
+          "entity": "gutschrift",
+          "op": "create",
+          "when": "always",
+          "fields": {
+            "gutschrift_pdf": "user",
+            "gutschriftsnummer": "user",
+            "gutschriftsdatum": "user",
+            "aussteller_firma": "user",
+            "aussteller_strasse": "user",
+            "aussteller_hausnummer": "user",
+            "aussteller_plz": "user",
+            "aussteller_ort": "user",
+            "aussteller_ustid": "user",
+            "empfaenger_firma": "user",
+            "empfaenger_strasse": "user",
+            "empfaenger_hausnummer": "user",
+            "empfaenger_plz": "user",
+            "empfaenger_ort": "user",
+            "nettobetrag": "user",
+            "steuersatz": "user",
+            "bruttobetrag": "user",
+            "bemerkung": "user"
+          },
+          "needs": {}
+        }
+      ],
+      "required": [
+        "gutschrift.aussteller_firma",
+        "gutschrift.aussteller_hausnummer",
+        "gutschrift.aussteller_ort",
+        "gutschrift.aussteller_plz",
+        "gutschrift.aussteller_strasse",
+        "gutschrift.aussteller_ustid",
+        "gutschrift.bruttobetrag",
+        "gutschrift.empfaenger_firma",
+        "gutschrift.empfaenger_hausnummer",
+        "gutschrift.empfaenger_ort",
+        "gutschrift.empfaenger_plz",
+        "gutschrift.empfaenger_strasse",
+        "gutschrift.gutschrift_pdf",
+        "gutschrift.gutschriftsdatum",
+        "gutschrift.gutschriftsnummer",
+        "gutschrift.nettobetrag",
+        "gutschrift.steuersatz"
+      ],
+      "brief": "# Flow `gutschrift-erfassen` — Gutschrift erfassen\nDie PDF-Gutschrift wird hochgeladen und die Kopfdaten für die ZUGFeRD-Erzeugung werden erfasst. Die ZUGFeRD-PDF entsteht danach automatisch.\n\n## Your hook — import it, never rebuild what it owns\n`import { useGutschriftErfassenFlow } from '@/lib/journey/flows/GutschriftErfassen';` — generated from the Schreibliste below. It OWNS the form(s), one record search per picked field (columns and filter from the plan) and the submit plan with every fixed and derived value. You compose: `flow.forms.<entity>` for <Bound>/<Field>, `{...flow.picks.<field>.select} {...flow.pick('<field>')}` (or `flow.pickMany` for a multi pick) for <EntitySelectStep>, `flow.validateStep(n)` in StepNav.onNext, `flow.submit` + `flow.formList` for SummaryStep/SuccessStep, `flow.reset()`; what the hook does not own reads through its door `flow.port` — availability `useOccupancy(flow.port, '<entity>', { resource })`, a count `useRecordCount(flow.port, …)` — never import servicePort next to the hook. Options: `steps` (field → step), `items` (how a hit reads, per pick), `initial`, `messages`. The hook's docblock in .lane-context.md shows the exact call. Never import servicePort, useStepForm, useJourneySubmit, useRecordSearch or useDashboardData in this page — check-intents refuses a page that uses the hook and any of them.\n\n## Steps (in this order)\n1. Gutschrift-PDF hochladen\n2. Aussteller und Empfänger erfassen\n3. Gutschriftsnummer und Datum eintragen\n4. Netto- und Bruttobetrag sowie Steuersatz eintragen\n5. Prüfen und speichern\n\n## Schreibliste — the ONLY writes this flow makes (the gate compares your plan steps with this list)\n- creates `gutschrift`:\n    - `gutschrift_pdf`: the user enters it (bind it through the layer: form.field/…) — **REQUIRED in this flow** (mark it required and validate it before the step advances, whatever the app's base view says): tool `zugferd-pdf-erzeugen` → `zugferd_pdf` cannot be built without it\n    - `gutschriftsnummer`: the user enters it (bind it through the layer: form.field/…) — **REQUIRED in this flow** (mark it required and validate it before the step advances, whatever the app's base view says): tool `zugferd-pdf-erzeugen` → `zugferd_pdf` cannot be built without it\n    - `gutschriftsdatum`: the user enters it (bind it through the layer: form.field/…) — **REQUIRED in this flow** (mark it required and validate it before the step advances, whatever the app's base view says): tool `zugferd-pdf-erzeugen` → `zugferd_pdf` cannot be built without it\n    - `aussteller_firma`: the user enters it (bind it through the layer: form.field/…) — **REQUIRED in this flow** (mark it required and validate it before the step advances, whatever the app's base view says): tool `zugferd-pdf-erzeugen` → `zugferd_pdf` cannot be built without it\n    - `aussteller_strasse`: the user enters it (bind it through the layer: form.field/…) — **REQUIRED in this flow** (mark it required and validate it before the step advances, whatever the app's base view says): tool `zugferd-pdf-erzeugen` → `zugferd_pdf` cannot be built without it\n    - `aussteller_hausnummer`: the user enters it (bind it through the layer: form.field/…) — **REQUIRED in this flow** (mark it required and validate it before the step advances, whatever the app's base view says): tool `zugferd-pdf-erzeugen` → `zugferd_pdf` cannot be built without it\n    - `aussteller_plz`: the user enters it (bind it through the layer: form.field/…) — **REQUIRED in this flow** (mark it required and validate it before the step advances, whatever the app's base view says): tool `zugferd-pdf-erzeugen` → `zugferd_pdf` cannot be built without it\n    - `aussteller_ort`: the user enters it (bind it through the layer: form.field/…) — **REQUIRED in this flow** (mark it required and validate it before the step advances, whatever the app's base view says): tool `zugferd-pdf-erzeugen` → `zugferd_pdf` cannot be built without it\n    - `aussteller_ustid`: the user enters it (bind it through the layer: form.field/…) — **REQUIRED in this flow** (mark it required and validate it before the step advances, whatever the app's base view says): tool `zugferd-pdf-erzeugen` → `zugferd_pdf` cannot be built without it\n    - `empfaenger_firma`: the user enters it (bind it through the layer: form.field/…) — **REQUIRED in this flow** (mark it required and validate it before the step advances, whatever the app's base view says): tool `zugferd-pdf-erzeugen` → `zugferd_pdf` cannot be built without it\n    - `empfaenger_strasse`: the user enters it (bind it through the layer: form.field/…) — **REQUIRED in this flow** (mark it required and validate it before the step advances, whatever the app's base view says): tool `zugferd-pdf-erzeugen` → `zugferd_pdf` cannot be built without it\n    - `empfaenger_hausnummer`: the user enters it (bind it through the layer: form.field/…) — **REQUIRED in this flow** (mark it required and validate it before the step advances, whatever the app's base view says): tool `zugferd-pdf-erzeugen` → `zugferd_pdf` cannot be built without it\n    - `empfaenger_plz`: the user enters it (bind it through the layer: form.field/…) — **REQUIRED in this flow** (mark it required and validate it before the step advances, whatever the app's base view says): tool `zugferd-pdf-erzeugen` → `zugferd_pdf` cannot be built without it\n    - `empfaenger_ort`: the user enters it (bind it through the layer: form.field/…) — **REQUIRED in this flow** (mark it required and validate it before the step advances, whatever the app's base view says): tool `zugferd-pdf-erzeugen` → `zugferd_pdf` cannot be built without it\n    - `nettobetrag`: the user enters it (bind it through the layer: form.field/…) — **REQUIRED in this flow** (mark it required and validate it before the step advances, whatever the app's base view says): tool `zugferd-pdf-erzeugen` → `zugferd_pdf` cannot be built without it\n    - `steuersatz`: the user enters it (bind it through the layer: form.field/…) — **REQUIRED in this flow** (mark it required and validate it before the step advances, whatever the app's base view says): tool `zugferd-pdf-erzeugen` → `zugferd_pdf` cannot be built without it\n    - `bruttobetrag`: the user enters it (bind it through the layer: form.field/…) — **REQUIRED in this flow** (mark it required and validate it before the step advances, whatever the app's base view says): tool `zugferd-pdf-erzeugen` → `zugferd_pdf` cannot be built without it\n    - `bemerkung`: the user enters it (bind it through the layer: form.field/…)\n\n## Checks BEFORE the write (block the submit with the message when they fail)\n- unique (field=`gutschrift.gutschriftsnummer`) — message: „Diese Gutschriftsnummer gibt es schon.“\n\n## Success page\n- shows: `gutschrift.gutschriftsnummer`, `gutschrift.gutschriftsdatum`, `gutschrift.bruttobetrag`\n\n## Never write these — another flow or a tool owns them\n- `gutschrift.zugferd_pdf` (owner: tool `zugferd-pdf-erzeugen`)\n"
+    }
+  ],
+  "public_pages": [],
+  "tools": [
+    {
+      "id": "zugferd-pdf-erzeugen",
+      "purpose": "Bei jeder neuen Gutschrift wird aus der hochgeladenen Gutschrift-PDF und den erfassten Kopfdaten eine ZUGFeRD-konforme PDF erzeugt und in das Feld ZUGFeRD-PDF gelegt. Es ist eine Gutschrift, keine Rechnungskorrektur."
+    }
+  ],
+  "covered_by_platform": [
+    {
+      "wish": "PDF-Gutschrift hochladen und Daten erfassen",
+      "feature": "record_form"
+    },
+    {
+      "wish": "Gutschriften finden und durchsuchen",
+      "feature": "search_filter"
+    },
+    {
+      "wish": "Gutschriften als Tabelle exportieren",
+      "feature": "csv_json_export"
+    }
+  ],
+  "ownership": {
+    "gutschrift": {
+      "gutschrift_pdf": "intent:gutschrift-erfassen",
+      "gutschriftsnummer": "intent:gutschrift-erfassen",
+      "gutschriftsdatum": "intent:gutschrift-erfassen",
+      "aussteller_firma": "intent:gutschrift-erfassen",
+      "aussteller_strasse": "intent:gutschrift-erfassen",
+      "aussteller_hausnummer": "intent:gutschrift-erfassen",
+      "aussteller_plz": "intent:gutschrift-erfassen",
+      "aussteller_ort": "intent:gutschrift-erfassen",
+      "aussteller_ustid": "intent:gutschrift-erfassen",
+      "empfaenger_firma": "intent:gutschrift-erfassen",
+      "empfaenger_strasse": "intent:gutschrift-erfassen",
+      "empfaenger_hausnummer": "intent:gutschrift-erfassen",
+      "empfaenger_plz": "intent:gutschrift-erfassen",
+      "empfaenger_ort": "intent:gutschrift-erfassen",
+      "nettobetrag": "intent:gutschrift-erfassen",
+      "steuersatz": "intent:gutschrift-erfassen",
+      "bruttobetrag": "intent:gutschrift-erfassen",
+      "bemerkung": "intent:gutschrift-erfassen",
+      "zugferd_pdf": "tool:zugferd-pdf-erzeugen"
+    }
+  },
+  "dashboard": {
+    "focus": [
+      "Zuletzt hochgeladene Gutschriften",
+      "Gutschriften ohne ZUGFeRD-PDF",
+      "Summe der Bruttobeträge"
+    ],
+    "hints": [
+      "Gutschriften ohne ZUGFeRD-PDF sind noch nicht verarbeitet",
+      "Die ZUGFeRD-PDF erscheint direkt an der Gutschrift"
+    ],
+    "wishes": []
+  }
+}
